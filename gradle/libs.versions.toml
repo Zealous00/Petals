@@ -1,7 +1,7 @@
 [versions]
 androidx = "1.5.0"
 composeCompiler = "1.5.3"
-compose = "1.5.3"
+compose = "1.5.4"
 datastore = "1.0.0"
 detekt = "1.23.1"
 koin = "3.5.0"
@@ -54,6 +54,7 @@ sqldelight-coroutines-extensions = { module = "com.squareup.sqldelight:coroutine
 sqldelight-sqlite-driver = { module = "com.squareup.sqldelight:sqlite-driver", version.ref = "sqldelight" }
 requery-sqlite = "com.github.requery:sqlite-android:3.43.0"
 play-services-ads = "com.google.android.gms:play-services-ads:22.4.0"
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version = "1.1.5" }
 
 [bundles]
 androidx-test = [

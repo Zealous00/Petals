@@ -43,7 +43,7 @@ android {
 
   defaultConfig {
     applicationId = "br.com.colman.petals"
-    minSdk = 21
+    minSdk = 26
     targetSdk = 34
     versionCode = 315010
     versionName = "3.15.0"
@@ -57,7 +57,7 @@ android {
     val keystore = rootProject.file("keystore")
     val keystoreSecret = rootProject.file("keystore.secret")
 
-    if(!keystore.exists() && keystoreSecret.exists()) {
+    if (!keystore.exists() && keystoreSecret.exists()) {
       logger.warn("Impossible to create signing configuration with files encrypted")
       return@signingConfigs
     }
@@ -142,7 +142,15 @@ android {
 
 }
 
+configurations.all {
+  resolutionStrategy {
+    // Force a specific version for kotlinx-coroutines-core
+    force("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
+  }
+}
+
 dependencies {
+  implementation(libs.androidx.junit.ktx)
   // Kotlin
   testRuntimeOnly(libs.kotlin.reflect)
   testImplementation(libs.kotlinx.coroutines.test)
@@ -174,6 +182,7 @@ dependencies {
   testImplementation(libs.bundles.kotest.common)
   androidTestImplementation(libs.bundles.kotest.android)
   androidTestImplementation(libs.bundles.kotest.common)
+//  androidTestImplementation(libs.bundles.compose.test)
 
   // Mockk
   testImplementation(libs.mockk)
@@ -215,6 +224,16 @@ dependencies {
 
   // For AppWidgets support
   implementation("androidx.glance:glance-appwidget:1.0.0")
+
+
+  // Test rules and transitive dependencies:
+  androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.4")
+  debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
+  androidTestImplementation("io.mockk:mockk-android:1.12.0")
+  androidTestImplementation("androidx.test.ext:junit:1.1.3")
+  androidTestImplementation("androidx.test:runner:1.5.2")
+  androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
+  androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
 
 }
 
